@@ -55,9 +55,11 @@ const COMMANDS = [
 echo '- Build' . PHP_EOL;
 
 foreach (BUILDS as $language => $buildCmd) {
+    $start = hrtime(true);
     shell_exec($buildCmd);
+    $elapsed = hrtime(true) - $start;
 
-    echo $language . ' built.' . PHP_EOL;
+    echo $language . ' built in ' . ($elapsed / 1e6) . ' ms' . PHP_EOL;
 }
 
 echo PHP_EOL . '- Run' . PHP_EOL;
